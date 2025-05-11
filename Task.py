@@ -23,7 +23,7 @@ class Task:
         self.createdAt = self.updatedAt = now.strftime("%Y-%m-%d %H:%M")
     
     def __str__(self):
-        return f"{self.id}\t{self.description}\t{self.status}\t{self.updatedAt}\t{self.createdAt}"
+        return f"{self.id}\t{self.description}\t{self.status}\t{self.createdAt}\t{self.updatedAt}"
     
     def updateDescription(self, newDescription):
 
@@ -45,3 +45,11 @@ class Task:
         now = datetime.now()
         self.updatedAt = now.strftime("%Y-%m-%d %H:%M")
     
+    def toDict(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "status": self.status,
+            "createdAt": self.createdAt,
+            "updatedAt": self.updatedAt
+        }
