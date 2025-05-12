@@ -7,20 +7,22 @@ class Task:
     IN_PROGRESS = "in-progress"
     DONE = "done"
 
-    #Variable to set unique id for each task
-    counter = 0
 
-    def __init__(self, description):
-        #Increment it before assigning to a task
-        Task.counter += 1
+    def __init__(self, id, description, status=TODO, createdAt=None, updatedAt=None):
 
-        self.id = Task.counter
-        self.status = Task.TODO
+        self.id = id
         self.description = description
+        self.status = status
+        
 
-        #Store the current date when a task is created
-        now = datetime.now()
-        self.createdAt = self.updatedAt = now.strftime("%Y-%m-%d %H:%M")
+        if createdAt is None and updatedAt is None:
+            #Store the current date when a task is created
+            now = datetime.now()
+            self.createdAt = self.updatedAt = now.strftime("%Y-%m-%d %H:%M")
+        else:
+            self.createdAt = createdAt
+            self.updatedAt = updatedAt
+        
     
     def __str__(self):
         return f"{self.id}\t{self.description}\t{self.status}\t{self.createdAt}\t{self.updatedAt}"
