@@ -6,6 +6,7 @@ class Task:
     TODO = "todo"
     IN_PROGRESS = "in-progress"
     DONE = "done"
+    DELETED = "deleted"
 
 
     def __init__(self, id, description, status=TODO, createdAt=None, updatedAt=None):
@@ -35,9 +36,12 @@ class Task:
             return
         
         self.description = newDescription
+        #Setting time when it was updated
+        now = datetime.now()
+        self.updatedAt = now.strftime("%Y-%m-%d %H:%M")
 
     def updateStatus(self, newStatus):
-        validStatus = [self.DONE, self.TODO, self.IN_PROGRESS]
+        validStatus = [self.DONE, self.TODO, self.IN_PROGRESS, self.DELETED]
 
         if newStatus not in validStatus:
             return print("Invalid status....")
