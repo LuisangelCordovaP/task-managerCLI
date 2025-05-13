@@ -35,6 +35,7 @@ class TaskManager:
             
         
         self.tasks.append(Task(nextId,description))
+        self.saveTasks()
         print(f"Task added successfully (ID: {nextId})")
     
     def updateTask(self,id,newDescription):
@@ -42,6 +43,7 @@ class TaskManager:
         for task in self.tasks:
             if task.id == id:
                 task.updateDescription(newDescription)
+                self.saveTasks()
                 isFound = True
         
         if not isFound:
@@ -52,6 +54,7 @@ class TaskManager:
         for task in self.tasks:
             if task.id == id:
                 task.updateStatus(newStatus)
+                self.saveTasks()
                 isFound = True
         
         if not isFound:
@@ -76,6 +79,3 @@ class TaskManager:
             print(tabulate(filtered_list, headers=['ID','DESCRIPTION','STATUS','CREATED AT','UPDATED AT']))
         else:
             print("No tasks to show yet")
-
-if __name__ == "__main__":
-    manager = TaskManager('tasks.json')
