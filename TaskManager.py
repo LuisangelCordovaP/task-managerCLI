@@ -60,7 +60,7 @@ class TaskManager:
         if not isFound:
             print('This id does not exist...') 
     
-    def listTasks(self, statusFilter=None):
+    def listTasks(self, statusFilter=None, returnOnly=None):
         if statusFilter is None:
             filtered_list = [
                 [task.id, task.description, task.status, task.createdAt, task.updatedAt]
@@ -74,6 +74,9 @@ class TaskManager:
                 for task in self.tasks 
                 if task.status == statusFilter
             ]
+        
+        if returnOnly:
+            return filtered_list
         
         if filtered_list:
             print(tabulate(filtered_list, headers=['ID','DESCRIPTION','STATUS','CREATED AT','UPDATED AT']))
